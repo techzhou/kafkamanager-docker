@@ -6,7 +6,8 @@ ENV ZK_HOSTS=localhost:2181 \
 
 ADD start-kafka-manager.sh /kafka-manager-${KM_VERSION}/start-kafka-manager.sh
 
-RUN mkdir -p /tmp && \
+RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /tmp && \
     cd /tmp && \
     wget https://github.com/yahoo/kafka-manager/archive/${KM_VERSION}.zip && \
     unzip ${KM_VERSION}.zip && cd kafka-manager-${KM_VERSION} && \
