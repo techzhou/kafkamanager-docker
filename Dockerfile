@@ -6,9 +6,12 @@ ENV ZK_HOSTS=localhost:2181 \
 
 ADD start-kafka-manager.sh /kafka-manager-${KM_VERSION}/start-kafka-manager.sh
 
-RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/* && \
+RUN \
     mkdir -p /tmp && \
     cd /tmp && \
+    curl -L -o sbt-0.13.9.deb https://dl.bintray.com/sbt/debian/sbt-0.13.9.deb && \
+    dpkg -i sbt-0.13.9.deb && \
+    apt-get update && apt-get install -y wget unzip sbt && rm -rf /var/lib/apt/lists/* && \ 
     wget https://github.com/yahoo/kafka-manager/archive/${KM_VERSION}.zip && \
     unzip ${KM_VERSION}.zip && cd kafka-manager-${KM_VERSION} && \
     echo 'scalacOptions ++= Seq("-Xmax-classfile-name", "200")' >> build.sbt && \
