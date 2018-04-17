@@ -16,7 +16,7 @@ RUN \
     wget https://github.com/yahoo/kafka-manager/archive/${KM_VERSION}.zip && \
     unzip ${KM_VERSION}.zip && cd kafka-manager-${KM_VERSION} && \
     echo 'scalacOptions ++= Seq("-Xmax-classfile-name", "200")' >> build.sbt && \
-    ./sbt clean dist && \
+    sbt clean dist && \
     unzip  -d / ./target/universal/kafka-manager-${KM_VERSION}.zip && \
     rm -fr /tmp/* /root/.sbt /root/.ivy2 && \
     chmod +x /kafka-manager-${KM_VERSION}/start-kafka-manager.sh && \
